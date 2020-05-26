@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: item-service
+  datasource:
+    #账号配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiongmao?serverTimezone=Asia/Shanghai
+    username: root
+    password: zjx19950426.
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+#output sql select
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

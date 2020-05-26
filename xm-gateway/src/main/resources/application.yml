@@ -1,0 +1,36 @@
+server:
+  port: 10010
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+spring:
+  application:
+    name: gateway
+
+zuul:
+  prefix: /api #路由前缀
+  routes:
+    item-service: /item/**
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
+
+#Zuul已经默认配置了Hystrix和ribbon 但有些具体配置需要重写;Feign中hystrix需要启用，这里不用
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+#hystrix通常与ribbon搭配
+ribbon:
+  ConnectionTimeOut: 500 #defaul 1000
+  ReadTimeOut: 2000 #defaul 1000
+  MaxAutoRetries: 0 #重试次数
+  MaxAutoRetriesNextServer: 0 #切换服务重试次数
+  #ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
+  #应该ribbonTimeout < hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds,否则WRAN

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xm-upload" />
+        <module name="xm-registry" />
+        <module name="xm-item-service" />
+        <module name="xm-gateway" />
+        <module name="xm-common" />
+        <module name="xm-item-interface" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="xiongmao" options="-parameters" />
+      <module name="xm-common" options="-parameters" />
+      <module name="xm-gateway" options="-parameters" />
+      <module name="xm-item" options="-parameters" />
+      <module name="xm-item-interface" options="-parameters" />
+      <module name="xm-item-service" options="-parameters" />
+      <module name="xm-registry" options="-parameters" />
+      <module name="xm-upload" options="-parameters" />
+    </option>
+  </component>
+</project>
