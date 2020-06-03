@@ -2,6 +2,7 @@ package com.itzjx.item.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.itzjx.common.dto.CartDTO;
 import com.itzjx.common.enums.ExceptionEnum;
 import com.itzjx.common.exception.XmException;
 import com.itzjx.common.vo.PageResult;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -51,7 +53,7 @@ public class GoodsService {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
-    public PageResult<SpuVo>  querySpuBoByPage(String key, Boolean saleable, Integer page, Integer rows) {
+    public PageResult<SpuVo> querySpuBoByPage(String key, Boolean saleable, Integer page, Integer rows) {
 
         Example example = new Example(Spu.class);
         Example.Criteria criteria = example.createCriteria();
@@ -69,14 +71,14 @@ public class GoodsService {
 
         // 执行查询
         List<Spu> spus = this.spuMapper.selectByExample(example);
-        if (CollectionUtils. isEmpty(spus)){
-            throw  new XmException(ExceptionEnum.GOODS_NOT_FOUND);
+        if (CollectionUtils.isEmpty(spus)) {
+            throw new XmException(ExceptionEnum.GOODS_NOT_FOUND);
         }
         //解析查询结果
         PageInfo<Spu> pageInfo = new PageInfo<>(spus);
 
         List<SpuVo> spuVos = new ArrayList<>();
-        spus.forEach(spu->{
+        spus.forEach(spu -> {
             SpuVo spuVo = new SpuVo();
             // copy共同属性的值到新的对象
             BeanUtils.copyProperties(spu, spuVo);
@@ -106,7 +108,7 @@ public class GoodsService {
         spu.setCreateTime(new Date());
         spu.setLastUpdateTime(spu.getCreateTime());
         int count = this.spuMapper.insert(spu);
-        if (count == 0){
+        if (count == 0) {
             throw new XmException(ExceptionEnum.GOODS_SAVE_ERROR);
         }
         // 新增spuDetail
@@ -118,7 +120,7 @@ public class GoodsService {
         saveSkuAndStock(spu);
 
         //向消息队列发送消息
-        this.sendMessage(spu.getId(),"insert");
+        this.sendMessage(spu.getId(), "insert");
     }
 
     private void saveSkuAndStock(Spu spu) {
@@ -126,12 +128,12 @@ public class GoodsService {
         // 新增sku
         List<Sku> skus = spu.getSkus();
         List<Stock> stocks = new ArrayList<>();
-        for (Sku sku: skus) {
+        for (Sku sku : skus) {
             sku.setSpuId(spu.getId());
             sku.setCreateTime(new Date());
             sku.setLastUpdateTime(sku.getCreateTime());
             count = skuMapper.insert(sku);
-            if (count == 0){
+            if (count == 0) {
                 throw new XmException(ExceptionEnum.GOODS_SAVE_ERROR);
             }
 
@@ -143,7 +145,7 @@ public class GoodsService {
 
         //批量新增库存
         count = stockMapper.insertList(stocks);
-        if (count == 0){
+        if (count == 0) {
             throw new XmException(ExceptionEnum.GOODS_SAVE_ERROR);
         }
     }
@@ -170,28 +172,23 @@ public class GoodsService {
         Sku sku = new Sku();
         sku.setSpuId(spuId);
         List<Sku> skus = skuMapper.select(sku);
-        if (CollectionUtils.isEmpty(skus)){
+        if (CollectionUtils.isEmpty(skus)) {
             throw new XmException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
         }
-        skus.forEach(s -> {
-            Stock stock = stockMapper.selectByPrimaryKey(s.getId());
-            if (stock == null){
-                throw new XmException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
-            }
-            s.setStock(stock.getStock());
-        });
+        //查询库存
+        loadStockInSku(skus);
         return skus;
     }
 
     @Transactional
     public void updateGoods(Spu spu) {
-        if (spu.getId() == null){
+        if (spu.getId() == null) {
             throw new XmException(ExceptionEnum.GOODS_ID_CANNOT_BE_NULL);
         }
         // 查询以前sku
         List<Sku> skus = this.querySkusBySpuId(spu.getId());
 
-        if (!CollectionUtils.isEmpty(skus)){
+        if (!CollectionUtils.isEmpty(skus)) {
             // 如果以前存在，则删除
             skus.forEach(sku -> {
                 //删除sku对应的库存
@@ -211,21 +208,31 @@ public class GoodsService {
         spu.setValid(null);
         spu.setSaleable(null);
         int count = spuMapper.updateByPrimaryKeySelective(spu);
-        if (count == 0){
+        if (count == 0) {
             throw new XmException(ExceptionEnum.GOODS_UPDATE_ERROR);
         }
         // 更新spu详情
-        count  = spuDetailMapper.updateByPrimaryKeySelective(spu.getSpuDetail());
-        if (count == 0){
+        count = spuDetailMapper.updateByPrimaryKeySelective(spu.getSpuDetail());
+        if (count == 0) {
             throw new XmException(ExceptionEnum.GOODS_UPDATE_ERROR);
         }
 
         //向消息队列发送消息
-        this.sendMessage(spu.getId(),"update");
+        this.sendMessage(spu.getId(), "update");
     }
 
     public Spu querySpuById(Long id) {
-        return this.spuMapper.selectByPrimaryKey(id);
+        //query spu
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if (spu == null) {
+            throw new XmException(ExceptionEnum.GOODS_NOT_FOUND);
+        }
+        //query sku
+        spu.setSkus(querySkusBySpuId(id));
+        //query spu detail
+        spu.setSpuDetail(querySpuDetailBySpuId(id));
+        return spu;
+
     }
 
     /**
@@ -233,20 +240,61 @@ public class GoodsService {
      * @param id
      * @param type
      */
-    public void sendMessage(Long id,String type){
+    public void sendMessage(Long id, String type) {
         //发送消息
         try {
-            amqpTemplate.convertAndSend("item." + type,id);
-        }catch (Exception e){
+            amqpTemplate.convertAndSend("item." + type, id);
+        } catch (Exception e) {
             log.error("{}商品消息发送异常，商品id：{}", type, id, e);
         }
     }
+
     /**
      * 通过skuid查询sku
      */
     public Sku querySkuById(Long id) {
-
         Sku sku = this.skuMapper.selectByPrimaryKey(id);
         return sku;
+    }
+
+    public List<Sku> querySkusByIds(List<Long> ids) {
+        List<Sku> skus = skuMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(skus)) {
+            throw new XmException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
+        }
+        loadStockInSku(skus);
+        return skus;
+    }
+
+    /**
+     * 查询每个sku对应的库存并且设置sku库存属性
+     * @param skus
+     */
+    private void loadStockInSku(List<Sku> skus) {
+
+        skus.forEach(s -> {
+            Stock stock = stockMapper.selectByPrimaryKey(s.getId());
+            if (stock == null) {
+                throw new XmException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
+            }
+            s.setStock(stock.getStock());
+        });
+    }
+
+    /**
+     * 减库存
+     * @param carts
+     */
+    @Transactional
+    public void decreaseStock(List<CartDTO> carts) {
+        for (CartDTO cart : carts) {
+            // 不能用if判断来实现减库存，当线程很多的时候，有可能引发超卖问题
+            // 加锁也不可以  性能太差，只有一个线程可以执行，当搭了集群时synchronized只锁住了当前一个tomcat
+            //redis/zeekooper中分布式锁,  也可以乐观锁 update tb_stock set stock = stock - num where id = * and stock >= num;
+            int count = stockMapper.decreaseStock(cart.getSkuId(), cart.getNum());
+            if (count != 1) {
+                throw new XmException(ExceptionEnum.STOCK_NOT_ENOUGH);
+            }
+        }
     }
 }

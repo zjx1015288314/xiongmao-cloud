@@ -7,25 +7,46 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="xm-upload" />
+        <module name="xm-auth-common" />
+        <module name="xm-item-interface" />
+        <module name="xm-user-interface" />
         <module name="xm-registry" />
+        <module name="xm-sms" />
+        <module name="xm-auth-service" />
+        <module name="xm-common" />
+        <module name="xm-user-service" />
+        <module name="xm-page" />
+        <module name="xm-upload" />
+        <module name="xm-search" />
         <module name="xm-item-service" />
         <module name="xm-gateway" />
-        <module name="xm-common" />
-        <module name="xm-item-interface" />
+        <module name="xm-cart" />
+        <module name="xm-order" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="xiongmao" options="-parameters" />
+      <module name="xm-auth" options="-parameters" />
+      <module name="xm-auth-common" options="-parameters" />
+      <module name="xm-auth-service" options="-parameters" />
+      <module name="xm-cart" options="-parameters" />
       <module name="xm-common" options="-parameters" />
       <module name="xm-gateway" options="-parameters" />
       <module name="xm-item" options="-parameters" />
       <module name="xm-item-interface" options="-parameters" />
       <module name="xm-item-service" options="-parameters" />
+      <module name="xm-order" options="-parameters" />
+      <module name="xm-page" options="-parameters" />
       <module name="xm-registry" options="-parameters" />
+      <module name="xm-search" options="-parameters" />
+      <module name="xm-sms" options="-parameters" />
       <module name="xm-upload" options="-parameters" />
+      <module name="xm-user" options="-parameters" />
+      <module name="xm-user-interface" options="-parameters" />
+      <module name="xm-user-service" options="-parameters" />
     </option>
   </component>
 </project>

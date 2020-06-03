@@ -22,11 +22,18 @@ public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
-
     public List<Category> queryListByParent(Long pid) {
         Category category = new Category();
         category.setParentId(pid);
         return this.categoryMapper.select(category);
+    }
+
+    public List<Category> queryByIds(List<Long> ids){
+        List<Category> list = categoryMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(list)){
+            throw new XmException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+        return list;
     }
 
     public List<String> queryNamesByIds(List<Long> ids) {

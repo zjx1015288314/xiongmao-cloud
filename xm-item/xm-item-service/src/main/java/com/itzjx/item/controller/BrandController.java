@@ -54,7 +54,7 @@ public class BrandController {
      * @param cids
      * @return
      */
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Void> saveBrand(Brand brand,@RequestParam("cids") List<Long> cids){
         this.brandService.saveBrand(brand,cids);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,7 +66,7 @@ public class BrandController {
      * @param cids
      * @return
      */
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<Void> updateBrand(Brand brand,@RequestParam("cids") List<Long> cids){
         this.brandService.updateBrand(brand,cids);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -91,9 +91,13 @@ public class BrandController {
      * @return
      */
     @GetMapping("{id}")
-    public Brand queryBrandById(@PathVariable("id")Long id){
-        Brand brand = this.brandService.queryBrandById(id);
-        return brand;
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("id")Long id){
+        return ResponseEntity.ok(brandService.queryBrandById(id));
+    }
+
+    @GetMapping("list")
+    public ResponseEntity<List<Brand>> queryBrandByIds(@RequestParam("ids") List<Long> ids){
+        return ResponseEntity.ok(brandService.queryBrandByIds(ids));
     }
 
 }

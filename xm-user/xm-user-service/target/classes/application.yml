@@ -1,0 +1,30 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: user-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiongmao?serverTimezone=Asia/Shanghai
+    username: root
+    password: zjx19950426.
+  redis:
+    host: 10.175.24.207
+    port: 6385
+  rabbitmq:
+    host: 10.175.24.207
+    username: itzjx
+    password: itzjx
+    virtual-host: /itzjx
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+
+mybatis:
+  type-aliases-package: com.itzjx.user.pojo

@@ -13,10 +13,10 @@ import java.util.List;
 public interface SpecificationApi {
 
     @GetMapping("groups/{cid}")
-    public ResponseEntity<List<SpecGroup>> querySpecGroups(@PathVariable("cid") Long cid);
+    List<SpecGroup> querySpecGroups(@PathVariable("cid") Long cid);
 
     @GetMapping("params")
-    public List<SpecParam> queryParams(
+    List<SpecParam> queryParams(
             @RequestParam(value = "gid", required = false) Long gid,
             @RequestParam(value = "cid", required = false) Long cid,
             @RequestParam(value = "generic", required = false) Boolean generic,

@@ -1,0 +1,5 @@
+com/itzjx/upload/config/ComponetImport.class
+com/itzjx/XmUploadApplication.class
+com/itzjx/upload/service/UploadService.class
+com/itzjx/upload/controller/UploadController.class
+com/itzjx/upload/config/UploadProperties.class

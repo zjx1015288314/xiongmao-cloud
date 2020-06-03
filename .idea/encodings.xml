@@ -3,14 +3,27 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-auth/xm-auth-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-auth/xm-auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-cart/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-item/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-item/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-item/xm-item-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-item/xm-item-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-page/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-search/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-sms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xm-upload/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-user/xm-user-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xm-user/xm-user-service/src/main/java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

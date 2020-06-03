@@ -1,0 +1,14 @@
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/api/BrandApi.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Brand.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/SpecGroup.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/SpecParam.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/api/GoodsApi.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Specification.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/vo/SpuVo.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Stock.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Category.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/SpuDetail.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Sku.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/api/SpecificationApi.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/api/CategoryApi.java
+/opt/developer/IDEA/workspace/xiongmao/xm-item/xm-item-interface/src/main/java/com/itzjx/item/pojo/Spu.java

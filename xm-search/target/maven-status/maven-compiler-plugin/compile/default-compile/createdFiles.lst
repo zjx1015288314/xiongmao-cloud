@@ -1,0 +1,13 @@
+com/itzjx/search/service/SearchService$1.class
+com/itzjx/XmSearchApplication.class
+com/itzjx/search/service/SearchService.class
+com/itzjx/search/client/GoodsClient.class
+com/itzjx/search/mq/ItemListener.class
+com/itzjx/search/controller/SearchController.class
+com/itzjx/search/pojo/Goods.class
+com/itzjx/search/client/BrandClient.class
+com/itzjx/search/pojo/SearchResult.class
+com/itzjx/search/repository/GoodsRepository.class
+com/itzjx/search/pojo/SearchRequest.class
+com/itzjx/search/client/SpecificationClient.class
+com/itzjx/search/client/CategoryClient.class

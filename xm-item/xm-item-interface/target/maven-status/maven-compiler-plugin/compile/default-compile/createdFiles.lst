@@ -1,0 +1,14 @@
+com/itzjx/item/pojo/Specification.class
+com/itzjx/item/api/CategoryApi.class
+com/itzjx/item/pojo/Stock.class
+com/itzjx/item/pojo/Sku.class
+com/itzjx/item/pojo/SpecGroup.class
+com/itzjx/item/api/BrandApi.class
+com/itzjx/item/pojo/SpecParam.class
+com/itzjx/item/pojo/Brand.class
+com/itzjx/item/pojo/Spu.class
+com/itzjx/item/pojo/Category.class
+com/itzjx/item/vo/SpuVo.class
+com/itzjx/item/api/GoodsApi.class
+com/itzjx/item/api/SpecificationApi.class
+com/itzjx/item/pojo/SpuDetail.class

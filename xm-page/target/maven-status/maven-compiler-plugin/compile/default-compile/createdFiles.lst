@@ -1,0 +1,9 @@
+com/itzjx/page/client/BrandClient.class
+com/itzjx/page/service/PageService.class
+com/itzjx/page/client/CategoryClient.class
+com/itzjx/page/mq/ItemListener.class
+com/itzjx/XmPageApplication.class
+com/itzjx/page/client/SpecificationClient.class
+com/itzjx/page/client/GoodsClient.class
+com/itzjx/page/controller/HelloController.class
+com/itzjx/page/controller/PageController.class

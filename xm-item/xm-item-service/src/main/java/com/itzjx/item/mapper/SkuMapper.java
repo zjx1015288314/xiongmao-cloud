@@ -1,12 +1,11 @@
 package com.itzjx.item.mapper;
 
 
+import com.itzjx.common.mapper.BaseMapper;
 import com.itzjx.item.pojo.Sku;
-import tk.mybatis.mapper.common.BaseMapper;
-import tk.mybatis.mapper.common.Mapper;
 
 /**
  * description
  */
-public interface SkuMapper extends Mapper<Sku> {
+public interface SkuMapper extends BaseMapper<Sku> {
 }

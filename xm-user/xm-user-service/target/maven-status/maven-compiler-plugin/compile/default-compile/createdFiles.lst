@@ -1,0 +1,4 @@
+com/itzjx/user/XmUserApplication.class
+com/itzjx/user/mapper/UserMapper.class
+com/itzjx/user/service/UserService.class
+com/itzjx/user/controller/UserController.class

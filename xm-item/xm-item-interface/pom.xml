@@ -27,7 +27,6 @@
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
         <!--    jackson    -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

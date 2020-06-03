@@ -1,5 +1,6 @@
 package com.itzjx.item.mapper;
 
+import com.itzjx.common.mapper.BaseMapper;
 import com.itzjx.item.pojo.Brand;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ import java.util.List;
  * description
  *  品牌的通用mapper来简化开发
  */
-public interface BrandMapper extends Mapper<Brand> {
+public interface BrandMapper extends BaseMapper<Brand> {
 
     /**
      * 新增商品分类和品牌中间表数据

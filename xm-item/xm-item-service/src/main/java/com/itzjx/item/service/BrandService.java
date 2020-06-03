@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 
@@ -90,7 +91,19 @@ public class BrandService {
 
     public Brand queryBrandById(Long id){
         Brand brand = this.brandMapper.selectByPrimaryKey(id);
+        if (brand == null){
+            throw new XmException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
         return brand;
     }
+
+    public List<Brand> queryBrandByIds(List<Long> ids) {
+        List<Brand> brands = brandMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(brands)){
+            throw new XmException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return brands;
+    }
+
 }
 

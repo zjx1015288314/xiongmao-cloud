@@ -1,5 +1,6 @@
 package com.itzjx.item.controller;
 
+import com.itzjx.common.dto.CartDTO;
 import com.itzjx.common.vo.PageResult;
 import com.itzjx.item.vo.SpuVo;
 import com.itzjx.item.pojo.Sku;
@@ -9,19 +10,19 @@ import com.itzjx.item.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("goods")
 public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
 
     /**
-     * 分页查询商品信息
+     * 分页查询商品spu信息
      * @param key
      * @param saleable 上下架
      * @param page
@@ -43,7 +44,7 @@ public class GoodsController {
     }
 
     /**
-     * 新增一个商品信息
+     * 新增一个商品信息(spu+skulist)
      * @param spu
      * @return
      */
@@ -54,7 +55,7 @@ public class GoodsController {
     }
 
     /**
-     * 通过spuId查询spuDetail
+     * 通过spuId查询spuDetail(description+specialSpec+genericSpec+packingList+afterService)
      * @param spuId
      * @return
      */
@@ -70,9 +71,20 @@ public class GoodsController {
      * @return
      */
     @GetMapping("sku/list")
-    public ResponseEntity<List<Sku>> querySkusBySpuId(@RequestParam("id")Long spuId){
+    public ResponseEntity<List<Sku>> querySkusByIds(@RequestParam("id")Long spuId){
         return ResponseEntity.ok(goodsService.querySkusBySpuId(spuId));
     }
+
+    /**
+     * 通过sku的id集合查询所有sku
+     * @param ids
+     * @return
+     */
+    @GetMapping("sku/list/ids")
+    public ResponseEntity<List<Sku>> querySkusByIds(@RequestParam("ids")List<Long> ids){
+        return ResponseEntity.ok(goodsService.querySkusByIds(ids));
+    }
+
 
     /**
      * 更新商品信息，对应界面（商品列表）
@@ -93,9 +105,6 @@ public class GoodsController {
     @GetMapping("spu/{id}")
     public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long id){
         Spu spu = this.goodsService.querySpuById(id);
-        if(spu == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return ResponseEntity.ok(spu);
     }
 
@@ -112,5 +121,16 @@ public class GoodsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(sku);
+    }
+
+    /**
+     * 减库存
+     * @param carts
+     * @return
+     */
+    @PostMapping("stock/decrease")
+    public ResponseEntity<Void> decreaseStock(@RequestBody List<CartDTO> carts){
+        goodsService.decreaseStock(carts);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

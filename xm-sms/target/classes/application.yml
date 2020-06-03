@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: sms-service
+  rabbitmq:
+    host: 10.175.24.207
+    username: itzjx
+    password: itzjx
+    virtual-host: /itzjx
+  redis:
+    host: 10.175.24.207
+    port: 6385
+server:
+  port: 8086
+
+xm:
+  sms:
+    accessKeyId: LTAI4GEbnpqRUx2HVig3jKB2
+    accessKeySecret: 4BM8e72dtT0gyeHz2rFdnl0wpiLTLy
+    signName: 熊猫商城
+    verifyCodeTemplate: SMS_191831257 #SMS_133976814

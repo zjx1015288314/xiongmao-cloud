@@ -1,0 +1,12 @@
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/mq/ItemListener.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/XmSearchApplication.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/controller/SearchController.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/pojo/SearchRequest.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/client/GoodsClient.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/repository/GoodsRepository.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/client/SpecificationClient.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/client/BrandClient.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/pojo/Goods.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/pojo/SearchResult.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/client/CategoryClient.java
+/opt/developer/IDEA/workspace/xiongmao/xm-search/src/main/java/com/itzjx/search/service/SearchService.java

@@ -12,11 +12,22 @@ spring:
 zuul:
   prefix: /api #路由前缀
   routes:
-    item-service: /item/**
-    upload-service:
-      path: /upload/**
-      serviceId: upload-service
-      strip-prefix: false
+    item-service: /item/**  #商品微服务    #path: /item-service/**  #url: http://127.0.0.1:8081
+    search-service: /search/**  #路由到搜索微服务
+    user-service: /user/**  #用户微服务
+    auth-service: /auth/** #授权中心微服务
+    cart-service: /cart/** #购物车微服务
+    order-service: /order/** #订单微服务
+    #文件上传不经过网关，不造成不必要的网络负担
+  ignored-services:
+    - upload-service    #文件上传微服务
+        #path: /upload/**
+        #serviceId: upload-service
+        #strip-prefix: false
+  # 转发时携带请求本身的头信息（目的时为了将cookie内容返回到对应的请求浏览器），请求头里面带有域名
+  add-host-header: true
+  #网关默认会将请求头和响应头中的敏感头信息都过滤掉，这里设置为null则请求头就不会被过滤掉
+  sensitive-headers:  #配置禁止使用头信息，这里设置为null,否则set-cookie无效
 
 #Zuul已经默认配置了Hystrix和ribbon 但有些具体配置需要重写;Feign中hystrix需要启用，这里不用
 hystrix:
@@ -25,12 +36,24 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 6000
+            timeoutInMilliseconds: 6000    #熔断超时时长：6000ms
 #hystrix通常与ribbon搭配
 ribbon:
-  ConnectionTimeOut: 500 #defaul 1000
-  ReadTimeOut: 2000 #defaul 1000
-  MaxAutoRetries: 0 #重试次数
-  MaxAutoRetriesNextServer: 0 #切换服务重试次数
+  ConnectionTimeOut: 1000 #连接超时时间(ms) defaul 1000
+  ReadTimeOut: 3500 #通信超时时间(ms) defaul 1000
+  MaxAutoRetries: 0 #同一实例的重试次数
+  MaxAutoRetriesNextServer: 0 #同一服务不同实例的重试次数
   #ribbonTimeout = (ribbonReadTimeout + ribbonConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
   #应该ribbonTimeout < hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds,否则WRAN
+xm:
+  jwt:
+    pubKeyPath: /home/zhaojiexiong/rsa/rsa.pub # 生成公钥的地址
+    cookieName: LY_TOKEN
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item

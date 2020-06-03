@@ -1,0 +1,5 @@
+com/itzjx/gateway/config/FilterProperties.class
+com/itzjx/gateway/config/GlobalCorsConfig.class
+com/itzjx/gateway/XmGateWay.class
+com/itzjx/gateway/filter/AuthFilter.class
+com/itzjx/gateway/config/JwtProperties.class

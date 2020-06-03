@@ -39,10 +39,17 @@ public class CategoryController {
             //404 资源服务器未找到
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        /*if (list == null || list.size() < 1) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }*/
         return ResponseEntity.ok(list);
+    }
+
+    /**
+     * select categoryList by categoryIds
+     * @param ids
+     * @return
+     */
+    @GetMapping("list/ids")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids){
+        return ResponseEntity.ok(categoryService.queryByIds(ids));
     }
 
     /**
