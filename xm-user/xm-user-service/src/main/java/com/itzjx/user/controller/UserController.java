@@ -34,7 +34,7 @@ public class UserController {
     }
 
     /**
-     * send message regietry code when register user
+     * send message registry code when register user
      * @param phone
      * @return
      */

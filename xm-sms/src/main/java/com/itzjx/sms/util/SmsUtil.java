@@ -83,7 +83,7 @@ public class SmsUtil {
             }
 
             log.info("[短信服务] 发送手机验证码,手机号:{}",phoneNumber);
-            //put phoneNUmber into redis
+            //put phoneNumber into redis
             redisTemplate.opsForValue().set(key,String.valueOf(System.currentTimeMillis()),1, TimeUnit.MINUTES);
             return sendSmsResponse;
         }catch (Exception e){
